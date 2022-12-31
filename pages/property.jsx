@@ -10,8 +10,6 @@ const property = () => {
                 <div className="absolute top-0 left-0 w-full h-[40vh] bg-black/70 z-10"/>
                 <img
                     className="absolute z-1 object-cover"
-                    // layout="fill"
-                    // objectFit="cover"
                     src={propertyIMG.src}
                     alt="React Project"
                 />
@@ -30,14 +28,14 @@ const property = () => {
                         This app was built as learning project. Frontend part was built using React, Redux Toolkit, Saas Modules and Backend part using Express.js, MongoDB. This app can Add Users and Add some tweets - in the same time you can delete them or edit.
                     </p>
                     <a
-                        href="https://github.com/Alex-Bezotosnyi/Users-Tweets__React-Redux-Express-MongoDB"
+                        href="https://github.com/Alex-Bezotosnyi/Users-Tweets"
                         target="_blank"
                         rel="noreferrer"
                     >
                         <button className="px-8 py-2 mt-4 mr-8">Code</button>
                     </a>
                     <a
-                        href="https://alex-bezotosnyi.github.io/Users-Tweets__React-Redux-Express-MongoDB/"
+                        href="https://alex-bezotosnyi.github.io/Users-Tweets/"
                         target="_blank"
                         rel="noreferrer"
                     >
