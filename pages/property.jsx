@@ -1,3 +1,4 @@
+import Image from "next/image";
 import React from 'react';
 import Link from 'next/link';
 import {RiRadioButtonFill} from 'react-icons/ri';
@@ -6,14 +7,12 @@ import propertyIMG from '../public/assets/projects/project-1.png';
 const property = () => {
     return (
         <div className="w-full">
-            <div className="w-screen h-[40vh] relative">
-                <div className="absolute top-0 left-0 w-full h-[40vh] bg-black/70 z-10"/>
+            <div className="w-screen h-[60vh] relative">
+                <div className="absolute top-0 left-0 w-full h-[60vh] bg-black/70 z-10"/>
                 <img
-                    className="absolute z-1 object-cover"
-                    // layout="fill"
-                    // objectFit="cover"
+                    className="absolute z-1 object-cover h-full w-full inset-0"
                     src={propertyIMG.src}
-                    alt="React Project"
+                    alt="ReactProject"
                 />
                 <div
                     className="absolute top-[70%] max-w-[1240px] w-full left-[50%] right-[50%] translate-x-[-50%] translate-y-[-50%] text-white z-10 p-2">
