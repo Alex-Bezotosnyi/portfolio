@@ -1,44 +1,80 @@
 import React, {useState} from 'react';
 import Link from "next/link";
-import {sendContactForm} from "../lib/api";
 
 import {AiOutlineMail} from "react-icons/ai";
 import {HiOutlineChevronDoubleUp} from "react-icons/hi";
 import {FaGithub, FaLinkedinIn} from "react-icons/fa";
 import ContactIMG from "../public/assets/main/contact.png";
 
-const initValues = {name: "", email: "", subject: "", message: ""};
-const initState = {isLoading: false, error: "", values: initValues};
-
 const Contact = () => {
-    const [state, setState] = useState(initState);
-    const {values, isLoading, error} = state;
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [subject, setSubject] = useState("");
+    const [message, setMessage] = useState("");
 
-    const handleChange = ({target}) =>
-        setState((prev) => ({
-            ...prev,
-            values: {
-                ...prev.values,
-                [target.name]: target.value,
-            },
-        }));
+    const [errors, setErrors] = useState({});
 
-    const onSubmitForm = async () => {
-        setState((prev) => ({
-            ...prev,
-            isLoading: true,
-        }));
-        try {
-            await sendContactForm(values);
-            setState(initState);
+    const handleValidation = () => {
+        let tempErrors = {};
+        let isValid = true;
 
-        } catch (error) {
-            setState((prev) => ({
-                ...prev,
-                isLoading: false,
-                error: error.message,
-            }));
+        if (name.length <= 0) {
+            tempErrors["name"] = true;
+            isValid = false;
         }
+        if (email.length <= 0) {
+            tempErrors["email"] = true;
+            isValid = false;
+        }
+        if (subject.length <= 0) {
+            tempErrors["subject"] = true;
+            isValid = false;
+        }
+        if (message.length <= 0) {
+            tempErrors["message"] = true;
+            isValid = false;
+        }
+
+        setErrors({ ...tempErrors });
+        console.log("errors", errors);
+        return isValid;
+    };
+
+    const onSubmitForm = async (e) => {
+        e.preventDefault();
+
+        let isValidForm = handleValidation();
+
+        if (isValidForm) {
+            const res = await fetch("/api/contact", {
+                body: JSON.stringify({
+                    email: email,
+                    name: name,
+                    subject: subject,
+                    message: message,
+                }),
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                method: "POST",
+            });
+
+            const { error } = await res.json();
+            if (error) {
+                console.log(error);
+
+                setName("");
+                setEmail("");
+                setMessage("");
+                setSubject("");
+                return;
+            }
+            setName("");
+            setEmail("");
+            setMessage("");
+            setSubject("");
+        }
+        console.log(name, email, subject, message);
     };
 
     return (
@@ -111,8 +147,8 @@ const Contact = () => {
                                     </label>
                                     <input type="text"
                                            name="name"
-                                           value={values.name}
-                                           onChange={handleChange}
+                                           value={name}
+                                           onChange={(e) => setName(e.target.value)}
                                            className="border-2 rounded-lg p-3 flex border-gray-300 dark:bg-gray-200 text-gray-800"
                                     />
                                 </div>
@@ -123,8 +159,8 @@ const Contact = () => {
                                     </label>
                                     <input type="email"
                                            name="email"
-                                           value={values.email}
-                                           onChange={handleChange}
+                                           value={email}
+                                           onChange={(e) => setEmail(e.target.value)}
                                            className="border-2 rounded-lg p-3 flex border-gray-300 dark:bg-gray-200 text-gray-800"
                                     />
                                 </div>
@@ -134,8 +170,8 @@ const Contact = () => {
                                     </label>
                                     <input type="text"
                                            name="subject"
-                                           value={values.subject}
-                                           onChange={handleChange}
+                                           value={subject}
+                                           onChange={(e) => setSubject(e.target.value)}
                                            className="border-2 rounded-lg p-3 flex border-gray-300 dark:bg-gray-200 text-gray-800"
                                     />
                                 </div>
@@ -145,8 +181,8 @@ const Contact = () => {
                                     </label>
                                     <textarea rows="10"
                                               name="message"
-                                              value={values.message}
-                                              onChange={handleChange}
+                                              value={message}
+                                              onChange={(e) => setMessage(e.target.value)}
                                               className="border-2 rounded-lg p-3 border-gray-300 dark:bg-gray-200 text-gray-800"/>
                                 </div>
                                 <button

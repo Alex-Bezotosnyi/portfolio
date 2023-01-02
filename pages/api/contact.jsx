@@ -1,48 +1,52 @@
-import { mailOptions, transporter } from "../../config/nodemailer";
+import sendgrid from "@sendgrid/mail";
 
-const CONTACT_MESSAGE_FIELDS = {
-    name: "Name",
-    email: "Email",
-    subject: "Subject",
-    message: "Message",
-};
+sendgrid.setApiKey(process.env.SENDGRID_API_KEY);
 
-const generateEmailContent = (data) => {
-    const stringData = Object.entries(data).reduce(
-        (str, [key, val]) =>
-            (str += `${CONTACT_MESSAGE_FIELDS[key]}: \n${val} \n \n`),
-        ""
-    );
-    const htmlData = Object.entries(data).reduce((str, [key, val]) => {
-        return (str += `<h3 class="form-heading" align="left">${CONTACT_MESSAGE_FIELDS[key]}</h3><p class="form-answer" align="left">${val}</p>`);
-    }, "");
+async function sendEmail(req, res) {
 
-    return {
-        text: stringData,
-        html: `<!DOCTYPE html><html> <head> <title></title> <meta charset="utf-8"/> <meta name="viewport" content="width=device-width, initial-scale=1"/> <meta http-equiv="X-UA-Compatible" content="IE=edge"/> <style type="text/css"> body, table, td, a{-webkit-text-size-adjust: 100%; -ms-text-size-adjust: 100%;}table{border-collapse: collapse !important;}body{height: 100% !important; margin: 0 !important; padding: 0 !important; width: 100% !important;}@media screen and (max-width: 525px){.wrapper{width: 100% !important; max-width: 100% !important;}.responsive-table{width: 100% !important;}.padding{padding: 10px 5% 15px 5% !important;}.section-padding{padding: 0 15px 50px 15px !important;}}.form-container{margin-bottom: 24px; padding: 20px; border: 1px dashed #ccc;}.form-heading{color: #2a2a2a; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-weight: 400; text-align: left; line-height: 20px; font-size: 18px; margin: 0 0 8px; padding: 0;}.form-answer{color: #2a2a2a; font-family: "Helvetica Neue", "Helvetica", "Arial", sans-serif; font-weight: 300; text-align: left; line-height: 20px; font-size: 16px; margin: 0 0 24px; padding: 0;}div[style*="margin: 16px 0;"]{margin: 0 !important;}</style> </head> <body style="margin: 0 !important; padding: 0 !important; background: #fff"> <div style=" display: none; font-size: 1px; color: #fefefe; line-height: 1px;  max-height: 0px; max-width: 0px; opacity: 0; overflow: hidden; " ></div><table border="0" cellpadding="0" cellspacing="0" width="100%"> <tr> <td bgcolor="#ffffff" align="center" style="padding: 10px 15px 30px 15px" class="section-padding" > <table border="0" cellpadding="0" cellspacing="0" width="100%" style="max-width: 500px" class="responsive-table" > <tr> <td> <table width="100%" border="0" cellspacing="0" cellpadding="0"> <tr> <td> <table width="100%" border="0" cellspacing="0" cellpadding="0" > <tr> <td style=" padding: 0 0 0 0; font-size: 16px; line-height: 25px; color: #232323; " class="padding message-content" > <h2>New Contact Message</h2> <div class="form-container">${htmlData}</div></td></tr></table> </td></tr></table> </td></tr></table> </td></tr></table> </body></html>`,
-    };
-};
+    try {
+        await sendgrid.send({
+            to: process.env.TO_EMAIL,
+            from: process.env.FROM_EMAIL,
+            subject: `[Lead from website] : ${req.body.subject}`,
+            html: `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        <html lang="en">
+        <head>
+          <meta charset="utf-8">
 
-const handler = async (req, res) => {
-    if (req.method === "POST") {
-        const data = req.body;
-        if (!data || !data.name || !data.email || !data.subject || !data.message) {
-            return res.status(400).send({ message: "Bad request" });
-        }
+          <title>The HTML5 Herald</title>
+          <meta name="description" content="The HTML5 Herald">
+          <meta name="author" content="SitePoint">
+        <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
 
-        try {
-            await transporter.sendMail({
-                ...mailOptions,
-                ...generateEmailContent(data),
-                subject: data.subject,
-            });
+          <link rel="stylesheet" href="css/styles.css?v=1.0">
 
-            return res.status(200).json({ success: true });
-        } catch (err) {
-            console.log(err);
-            return res.status(400).json({ message: err.message });
-        }
+        </head>
+
+        <body>
+          <div class="img-container" style="display: flex;justify-content: center;align-items: center;border-radius: 5px;overflow: hidden; font-family: 'helvetica', 'ui-sans';">
+                </div>
+                <div class="container" style="margin-left: 20px;margin-right: 20px;">
+                <h3>You've got a new mail from ${req.body.name}, their email is: ✉️${req.body.email} </h3>
+                <div style="font-size: 16px;">
+                <p>Message:</p>
+                <p>${req.body.message}</p>
+                <br>
+                </div>
+                <img src="https://manuarora.in/logo.png" class="logo-image" style="height: 50px;width: 50px;border-radius: 5px;overflow: hidden;">
+                <p class="footer" style="font-size: 16px;padding-bottom: 20px;border-bottom: 1px solid #D1D5DB;">Regards<br>Manu Arora<br>Software Developer<br>+91 9587738861</p>
+                <div class="footer-links" style="display: flex;justify-content: center;align-items: center;">
+                </div>
+                </div>
+        </body>
+        </html>`,
+        });
+    } catch (error) {
+        console.log(error);
+        return res.status(error.statusCode || 500).json({error: error.message});
     }
-    return res.status(400).json({ message: "Bad request" });
-};
-export default handler;
+
+    return res.status(200).json({error: ""});
+}
+
+export default sendEmail;
