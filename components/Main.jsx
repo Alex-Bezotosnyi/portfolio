@@ -1,5 +1,6 @@
-import Link from "next/link";
 import React from 'react';
+import Link from "next/link";
+
 import {AiOutlineMail} from "react-icons/ai";
 import {FaGithub, FaLinkedinIn} from "react-icons/fa";
 
@@ -7,7 +8,7 @@ const Main = () => {
     return (
         <div id="main"
              className="w-full h-screen text-center">
-            <div className="max-w-[1240px] w-full h-full flex justify-center items-center p-2 mx-auto ">
+            <div className="max-w-[1240px] w-full h-full flex justify-center items-center p-2 mx-auto">
                 <div>
                     <p className="uppercase text-sm tracking-widest text-gray-600">
                         LET'S BUILD SOMETHING TOGETHER
@@ -25,26 +26,27 @@ const Main = () => {
                     <div className="flex items-center justify-between max-w-[330px] m-auto py-4">
                         <Link href="https://www.linkedin.com/in/alex-bezotosnyi/" target="_blank">
                             <div
-                                className="rounded-full shadow-lg shadow=gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300">
+                                className="rounded-full shadow-lg shadow-gray-300 p-6 cursor-pointer hover:scale-110 ease-in duration-300 dark:bg-gray-600 shadow-gray-700 shadow-md">
                                 <FaLinkedinIn/>
                             </div>
                         </Link>
                         <Link href="https://github.com/Alex-Bezotosnyi/" target="_blank">
                             <div
-                                className="rounded-full shadow-lg shadow=gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300">
+                                className="rounded-full shadow-lg shadow-gray-300 p-6 cursor-pointer hover:scale-110 ease-in duration-300 dark:bg-gray-600 shadow-gray-700 shadow-md">
                                 <FaGithub/>
                             </div>
                         </Link>
-                        <div
-                            className="rounded-full shadow-lg shadow=gray-400 p-6 cursor-pointer hover:scale-110 ease-in duration-300">
-                            <AiOutlineMail/>
-                        </div>
+                        <Link href="mailto:alexbezaua@gmail.com" target="_blank">
+                            <div
+                                className="rounded-full shadow-lg shadow-gray-300 p-6 cursor-pointer hover:scale-110 ease-in duration-300 dark:bg-gray-600 shadow-gray-700 shadow-md">
+                                <AiOutlineMail/>
+                            </div>
+                        </Link>
                     </div>
                 </div>
             </div>
         </div>
     )
-        ;
 };
 
 export default Main;
