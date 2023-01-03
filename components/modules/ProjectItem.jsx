@@ -6,7 +6,7 @@ import ProjectIMG from "../../public/assets/projects/project-1.png";
 const ProjectItem = ( {title, backgroundImg, projectURL} ) => {
     return (
         <div>
-            <div className="relative flex items-center justify-center h-auto w-full shadow-xl shadow-gray-400 rounded-xl p-4 group hover:bg-gradient-to-r from-[#5651e5] to-[#709dff] dark:shadow-gray-600 shadow-md">
+            <div className="relative flex items-center justify-center h-auto w-full shadow-xl shadow-gray-400 rounded-xl p-4 group hover:bg-blue-400 transition-all duration-500 dark:shadow-gray-800 dark:shadow-md">
                 <img className="rounded-xl group-hover:opacity-10"
                        src={backgroundImg.src}
                        alt="Project"/>

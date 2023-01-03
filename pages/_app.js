@@ -1,21 +1,22 @@
-import {Poppins} from "@next/font/google"
+import { ThemeProvider } from "next-themes";
 import Navbar from "../components/Navbar";
-import {ThemeProvider} from 'next-themes';
-import '../styles/globals.css';
+import { PT_Sans } from "@next/font/google";
 
-const poppins = Poppins({
-    weight: "400",
-})
+import "../styles/globals.css";
 
-export default function App({Component, pageProps}) {
-    return (
-        <>
-            <ThemeProvider enableSystem={true} attribute="class">
-                <Navbar/>
-                <main className={poppins.className}>
-                    <Component {...pageProps} />
-                </main>
-            </ThemeProvider>
-        </>
-    );
-};
+const font = PT_Sans({
+	weight: "400"
+});
+
+export default function App({ Component, pageProps }) {
+	return (
+		<>
+			<ThemeProvider enableSystem={true} attribute="class">
+				<Navbar />
+				<main className={font.className}>
+					<Component {...pageProps} />
+				</main>
+			</ThemeProvider>
+		</>
+	);
+}
