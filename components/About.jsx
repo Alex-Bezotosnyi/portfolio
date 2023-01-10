@@ -14,23 +14,22 @@ const About = () => {
 						About
 					</p>
 					<h2 className="py-4">Who I Am</h2>
-					<p className="py-2 text-gray-600">
+					<p className="py-2 text-gray-600 text-lg">
 						Hello! I’m Alex and I’m Frontend Developer.
 					</p>
-					<p className="py-2 text-gray-600">
+					<p className="py-2 text-gray-600 text-lg">
 						Owning such technologies as HTML/SCSS, JavaScript,
 						TypeScript, React, Redux/Redux Toolkit, Next.js,
 						Node.js, Express.js, etc., believe that I can be very
 						useful in the development of your company.
 					</p>
-					<p className="py-2 text-gray-600">
+					<p className="py-2 text-gray-600 text-lg">
 						In my free time I go trekking and hiking - I love this
 						pastime. At times I go in for mountaineering and rock
 						climbing, but rarely.
 					</p>
-					<p className="py-2 text-gray-600">
-						You can check out my Resume by clicking on the link
-						below.
+					<p className="py-2 text-gray-600 text-lg">
+						You can check out my Resume by clicking the link below.
 					</p>
 					<p className="py-2 text-gray-600 underline cursor-pointer no-underline">
 						<a

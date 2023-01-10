@@ -16,7 +16,7 @@ const project2 = () => {
 				/>
 				<div className="absolute top-[70%] max-w-[1240px] w-full left-[50%] right-[50%] translate-x-[-50%] translate-y-[-50%] text-white z-10 p-2">
 					<h2 className="py-2">Portfolio</h2>
-					<h3>Next.js | Tailwind | SendGrid</h3>
+					<h3>Next.js | Tailwind</h3>
 				</div>
 			</div>
 			<div className="max-w-[1240px] mx-auto p-2 grid md:grid-cols-5 gap-8 py-8">
@@ -24,9 +24,9 @@ const project2 = () => {
 					<h3 className="py-2">Overview</h3>
 					<p>
 						This project is 2in1 for me: firstly, the practical
-						improvement of skills in working with Next.js and
-						SendGrid, as well as the creation of my own portfolio.
-						The project is built using Next.js, Tailwind, SendGrid.
+						improvement of skills in working with Next.js, as well
+						as the creation of my own portfolio. The project is
+						built using Next.js, Tailwind.
 					</p>
 					<a
 						href="https://github.com/Alex-Bezotosnyi/portfolio"
@@ -50,9 +50,6 @@ const project2 = () => {
 							</p>
 							<p className="text-gray-600 py-2 px-4 flex items-center">
 								<RiRadioButtonFill className="pr-1" /> Tailwind
-							</p>
-							<p className="text-gray-600 py-2 px-4 flex items-center">
-								<RiRadioButtonFill className="pr-1" /> SendGrid
 							</p>
 						</div>
 					</div>

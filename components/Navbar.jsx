@@ -209,7 +209,7 @@ const Navbar = () => {
 									</div>
 								</Link>
 								<Link
-									href="mailto:alexbezaua@gmail.com"
+									href="mailto:oleksandr.bezotosnyi@gmail.com"
 									target="_blank"
 								>
 									<div className="rounded-full shadow-sm shadow-gray-800 p-3 cursor-pointer hover:scale-110 ease-in duration-300 dark:bg-gray-600 dark:shadow-md">

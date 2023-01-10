@@ -8,7 +8,7 @@ import Project3IMG from "../public/assets/projects/project-3.png";
 const Projects = () => {
 	return (
 		<div id="projects" className="w-full p-2">
-			<div className="max-w-[1240px] mx-4 py-16 lg:mx-auto flex flex-col h-full">
+			<div className="max-w-[1240px] mx-4 px-2 py-16 lg:mx-auto flex flex-col h-full">
 				<p className="uppercase text-xl tracking-widest py-2 px-4 text-gray-800 border-4 border-blue-600 w-fit max-w-fit rounded-lg dark:text-gray-100">
 					Projects
 				</p>
